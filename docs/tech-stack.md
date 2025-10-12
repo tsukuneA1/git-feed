@@ -8,7 +8,8 @@
 
 ### Container/Presentationalパターン
 
-シンプルで学習コストが低いため採用。フロントエンドのcomponentsをContainerとPresentationalに2分割し、Containerがロジックと状態の制御を行い、そのpropsをPresentationalのcomponentsが受け取ってUIを表示する。フロントエンドがMVPではあまりファットになりそうでなかったこともありatomic designやfeature-sliced designは学習の負荷が高い割に、恩恵を享受しづらそうだった。
+シンプルで学習コストが低いため採用。フロントエンドのcomponentsをContainerとPresentationalに2分割し、Containerがロジックと状態の制御を行い、そのpropsをPresentationalのcomponentsが受け取ってUIを表示する。
+フロントエンドがMVPではあまりファットになりそうでなかったこともありatomic designやfeature-sliced designは学習の負荷が高い割に、恩恵を享受しづらそうだったため採用しなかった。
 
 参考
 - [Container/Presentationalパターン](https://zenn.dev/buyselltech/articles/9460c75b7cd8d1)
