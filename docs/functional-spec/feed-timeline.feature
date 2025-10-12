@@ -17,12 +17,12 @@ Feature: <欲しい機能や振る舞いを一文で簡潔に説明する>
     Then タイムラインにはタグ設定で設定した全タグに基づくフィードが表示される
         And ユーザーが未登録のタグにのみ紐づくフィードは表示されない
 
-  Scenario: PRカードの「Githubへ」ボタンを押すと該当PRのGithubページが新しいタブで開く
+  Scenario: PRカードの「GitHubへ」ボタンを押すと該当PRのGitHubページが新しいタブで開く
     Given ユーザーがログインしている
       And ユーザーがタイムラインを開いている
       And タイムラインにPRカードが表示されている
-    When ユーザーがPRカードの「Githubへ」ボタンを押す
-    Then 該当PRのGithubページが新しいタブで開く
+    When ユーザーがPRカードの「GitHubへ」ボタンを押す
+    Then 該当PRのGitHubページが新しいタブで開く
 
   Scenario: タイムラインのPRカードには必要な情報が表示される
     Given ユーザーがログインしている
