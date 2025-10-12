@@ -23,11 +23,6 @@
     When 「GitHubでサインイン」と書かれたボタンを押す
     Then サインインできず、エラーメッセージが表示される
 
-  Scenario: GitHubアカウントを持っていない場合
-    Given 「GitHubでサインイン」画面に移動するボタンを押したとき
-    When GitHubアカウントを持っていなかった場合
-    Then 「アカウントを所持していません」と表示され、サインインできない
-
   Scenario: アクセストークンの取得に失敗した場合
     Given GitHub OAuth フロー中
     When アクセストークンの取得に失敗した
