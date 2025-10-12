@@ -1,6 +1,6 @@
 Feature: GitHub OAuthによる新規アカウント作成
   As a 新規ユーザー
-  I want GitHubアカウントでログインできる
+  I want GitHubアカウントでサインインできる
   So that アカウントを自動作成して簡単にサービスを利用できる
 
   Scenario: GitHubアカウントがアプリに未登録の場合
