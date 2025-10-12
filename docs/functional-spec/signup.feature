@@ -10,11 +10,6 @@ Feature: GitHub OAuthによる新規アカウント作成
       And トップページに遷移する
       And ウェルカムメッセージを表示する
 
-  Scenario: GitHubアカウントを所持していなかった場合
-    Given GitHub OAuth フロー中
-    When GitHubアカウントを所持していなかった
-    Then 「GitHubアカウントを所持していません」と表示され、サインアップできない
-
   Scenario: 新規ユーザー作成に失敗した場合（DBエラーなど）
     Given GitHub OAuth フロー中
     When 新規ユーザー作成に失敗した
