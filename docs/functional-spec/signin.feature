@@ -1,12 +1,4 @@
-  Scenario: <具体的な状況やケースの名前>
-    Given <前提条件>
-      And <他の前提条件>
-    When <ユーザーの操作またはシステムのイベント>
-      And <追加の操作やイベント>
-    Then <確認したい結果>
-      And <他に確認したい結果>
-
-Feature: GitHubサインイン機能
+ Feature: GitHubサインイン機能
   As a ユーザー
   I want GitHubアカウントでサインインできるようにしたい
   So that サイトのページを閲覧できるようにする
