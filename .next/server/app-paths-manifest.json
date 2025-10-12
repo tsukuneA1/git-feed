@@ -1,0 +1,7 @@
+{
+  "/page": "app/page.js",
+  "/tags/settings/page": "app/tags/settings/page.js",
+  "/timeline/select/page": "app/timeline/select/page.js",
+  "/signin/page": "app/signin/page.js",
+  "/signup/page": "app/signup/page.js"
+}
