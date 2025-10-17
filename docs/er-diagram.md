@@ -1,9 +1,4 @@
-# Domain ER Diagram (Draft)
-
-サービス全体の主要エンティティを俯瞰するための仮置きER図です。今後のコンテキスト分割やAPI契約整理のベースとして利用します。
-
-```mermaid
-erDiagram
+```erDiagram
     USER ||--o{ AUTH_SESSION : "maintains"
     USER ||--o{ GITHUB_TOKEN : "authorizes"
     USER ||--o{ USER_TAG_SETTING : "configures"
@@ -19,7 +14,7 @@ erDiagram
 
     USER {
       string id PK
-      int github_user_id UK
+      int github_user_id
       string display_name
       string avatar_url
       datetime onboarding_completed_at
@@ -76,12 +71,11 @@ erDiagram
       string timeline_selection_id FK
       string tag_id FK
       int position
-      PK { timeline_selection_id, tag_id }
     }
 
     FEED_ITEM {
       string id PK
-      string github_pull_id UK
+      string github_pull_id
       string repo_full_name
       string title
       string summary
@@ -96,7 +90,6 @@ erDiagram
     FEED_ITEM_TAG {
       string feed_item_id FK
       string tag_id FK
-      PK { feed_item_id, tag_id }
     }
 
     USER_FEED_CURSOR {
@@ -107,4 +100,3 @@ erDiagram
       datetime updated_at
     }
 ```
-
