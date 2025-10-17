@@ -14,11 +14,11 @@ sequenceDiagram
     GitHub ->> Frontend: Redirect with code,state
     Frontend ->> API: code, state, code_verifierを渡す
     API ->> API: state検証
-    API ->> GitHub: code, client_secret, code_verifierを渡す
+    API ->> GitHub: POST (client_id, client_secret, code, redirect_uri) を送信
     GitHub -->> API: access_token
-    API ->> GitHub: GET request with access_token
-    GitHub -->> API: user_info (id, login, email) 
-    API ->> DB: find_or_create_user(github_id, user_info)
+    API ->> GitHub: GET /user with access_token
+    GitHub -->> API: user_info (id, login) 
+    API ->> DB: find_or_create_user(github_id, login)
     DB -->> API: user_record
     API ->> Frontend: JWT token + user info
     Frontend ->> User: ログイン完了画面へ遷移
