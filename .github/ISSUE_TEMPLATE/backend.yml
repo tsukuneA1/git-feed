@@ -1,0 +1,19 @@
+name: ⚙️ バックエンド
+description: バックエンド(API/サーバー)に関するissue
+title: "[Backend] "
+labels: ["backend"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        バックエンドに関するissueを報告してください。
+      
+  - type: textarea
+    id: description
+    attributes:
+      label: 説明
+      description: issueの詳細を記載してください
+      placeholder: |
+        何が起きているのか、何を実装したいのかを具体的に記述してください。
+    validations:
+      required: false
