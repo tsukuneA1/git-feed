@@ -7,20 +7,6 @@ body:
     attributes:
       value: |
         バックエンドに関するissueを報告してください。
-        
-  - type: dropdown
-    id: issue-type
-    attributes:
-      label: Issue の種類
-      description: このissueの種類を選択してください
-      options:
-        - バグ報告
-        - 機能追加
-        - 改善提案
-        - ドキュメント
-        - その他
-    validations:
-      required: true
       
   - type: textarea
     id: description
@@ -30,49 +16,4 @@ body:
       placeholder: |
         何が起きているのか、何を実装したいのかを具体的に記述してください。
     validations:
-      required: true
-      
-  - type: textarea
-    id: steps
-    attributes:
-      label: 再現手順 / 実装案
-      description: バグの場合は再現手順、機能追加の場合は実装案を記載してください
-      placeholder: |
-        1. APIエンドポイントにリクエスト
-        2. 特定のパラメータを送信
-        3. エラーが発生
-        
-  - type: textarea
-    id: expected
-    attributes:
-      label: 期待される動作
-      description: どのような動作を期待していますか？
-      
-  - type: textarea
-    id: actual
-    attributes:
-      label: 実際の動作
-      description: 実際にはどのような動作をしていますか？（バグ報告の場合）
-      
-  - type: textarea
-    id: api-details
-    attributes:
-      label: API詳細
-      description: 関連するAPIエンドポイント、リクエスト/レスポンスの情報があれば記載してください
-      placeholder: |
-        - エンドポイント: POST /api/users
-        - リクエスト: { "name": "test" }
-        - レスポンス: 500 Internal Server Error
-        
-  - type: textarea
-    id: logs
-    attributes:
-      label: ログ・エラーメッセージ
-      description: サーバーログやエラーメッセージがあれば記載してください
-      render: shell
-      
-  - type: textarea
-    id: additional
-    attributes:
-      label: 追加情報
-      description: その他関連情報があれば記載してください
+      required: false
