@@ -1,12 +1,12 @@
 ```mermaid
 erDiagram
     User ||--o{ UserTag : "selects"
-    Tag ||--o{ UserTag : "selected by"
     User ||--o{ Session : "has"
     User ||--o{ GithubToken : "provides"
     Feed }o--|| Repository : "belongs to"
     Feed ||--o{ FeedTag : "has"
     Tag ||--o{ FeedTag : "tagged to"
+    Tag ||--o{ UserTag : "selected by"
 
     User {
         int id PK
