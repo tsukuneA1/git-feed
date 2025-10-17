@@ -4,7 +4,7 @@ erDiagram
     Tag ||--o{ UserTag : "selected by"
     User ||--o{ Session : "has"
     User ||--o{ GithubToken : "provides"
-    Feed }o--|| Repository : "belongs to"
+    Repository ||--o{ Feed: "belongs to"
     Feed }o--|| Tag : "tagged with"
 
     User {
