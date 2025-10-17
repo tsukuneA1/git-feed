@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     participant User as ユーザー
     participant Frontend as Next.js
@@ -19,3 +20,4 @@ sequenceDiagram
     DB -->> API: user_record
     API ->> Frontend: JWT token + user info
     Frontend ->> User: ログイン完了画面へ遷移
+```
