@@ -1,6 +1,6 @@
-# 技術選定
+# フロントエンド
 
-## フロントエンド
+## 技術選定
 
 ### Next.js App Router
 
@@ -23,6 +23,3 @@
 
 参考
 - [【2023年】SWR & TanStack Query比較](https://zenn.dev/aishift/articles/288e4470cfc45e)
-
-## バックエンド
-
