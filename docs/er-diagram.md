@@ -4,8 +4,9 @@ erDiagram
     Tag ||--o{ UserTag : "selected by"
     User ||--o{ Session : "has"
     User ||--o{ GithubToken : "provides"
-    Repository ||--o{ Feed: "belongs to"
-    Feed }o--|| Tag : "tagged with"
+    Feed }o--|| Repository : "belongs to"
+    Feed ||--o{ FeedTag : "has"
+    Tag ||--o{ FeedTag : "tagged to"
 
     User {
         int id PK
@@ -64,13 +65,19 @@ erDiagram
     Feed {
         int id PK
         int repository_id FK "UK with pr_number"
-        int tag_id FK
         int pr_number "UK with repository_id"
         string pr_title
         string summary
         int additions
         int deletions
         datetime merged_at
+        datetime created_at
+    }
+
+    FeedTag {
+        int id PK
+        int feed_id FK
+        int tag_id FK
         datetime created_at
     }
 ```
