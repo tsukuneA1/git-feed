@@ -43,9 +43,9 @@ erDiagram
     Session {
         int id PK
         int user_id FK
-        string session_token UK 
-        datetime expires_at 
-        datetime created_at 
+        string session_token UK
+        datetime expires_at
+        datetime created_at
     }
 
     Repository {
@@ -64,13 +64,13 @@ erDiagram
         int id PK
         int repository_id FK
         int tag_id FK
-        string pr_number 
-        string pr_title 
-        string pr_url 
-        string summary 
-        int additions 
+        string pr_number
+        string pr_title
+        string pr_url
+        string summary
+        int additions
         int deletions
         datetime merged_at
-        datetime created_at 
+        datetime created_at
     }
 ```
