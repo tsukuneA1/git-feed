@@ -65,7 +65,7 @@ erDiagram
         int id PK
         int repository_id FK "UK with pr_number"
         int tag_id FK
-        int pr_number "UK with pr_number"
+        int pr_number "UK with repository_id"
         string pr_title
         string summary
         int additions
