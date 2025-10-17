@@ -3,14 +3,25 @@ erDiagram
     User ||--o{ UserTag : "selects"
     Tag ||--o{ UserTag : "selected by"
     User ||--o{ Session : "has"
+    User ||--o{ GithubToken : "provides"
     Feed }o--|| Repository : "belongs to"
     Feed }o--|| Tag : "tagged with"
 
     User {
         int id PK
         string github_user_id UK
-        string username 
+        string username
         string avatar_url
+        datetime created_at
+        datetime updated_at
+    }
+
+    GithubToken {
+        int id PK
+        int user_id FK
+        string access_token
+        datetime expires_at
+        boolean is_active
         datetime created_at
         datetime updated_at
     }
