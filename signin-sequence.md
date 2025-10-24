@@ -20,6 +20,11 @@ sequenceDiagram
     GitHub -->> API: user_info (id, login)
     API ->> DB: find_or_create_user(github_id, login)
     DB -->> API: user_record
-    API ->> Frontend: Set-Cookie: JWT (Secure, HttpOnly, SameSite=Lax) + user info
-    Frontend ->> User: ログイン完了画面へ遷移
+    alt 既存ユーザー（サインイン）
+        API -->> Frontend: Set-Cookie: JWT + user info
+        Frontend ->> User: Redirect to Timeline
+    else 新規ユーザー（サインアップ）
+        API -->> Frontend: Set-Cookie: JWT + user info
+        Frontend ->> User: Redirect to Settings
+    end
 ```
