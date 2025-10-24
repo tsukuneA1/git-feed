@@ -8,7 +8,7 @@ sequenceDiagram
 
     User ->> Frontend: 「GitHubでサインイン」クリック
     Frontend ->> Frontend: state, code_verifier生成
-    Frontend ->> GitHub: Redirect (state, code_challenge付き)
+    Frontend ->> GitHub: Redirect (state, code_challenge, code_challenge_method=S256付き)
     GitHub ->> User: 認可画面表示
     User ->> GitHub: 認可を許可
     GitHub ->> Frontend: Redirect with code,state
@@ -17,9 +17,9 @@ sequenceDiagram
     API ->> GitHub: POST (client_id, client_secret, code, redirect_uri) を送信
     GitHub -->> API: access_token
     API ->> GitHub: GET /user with access_token
-    GitHub -->> API: user_info (id, login) 
+    GitHub -->> API: user_info (id, login)
     API ->> DB: find_or_create_user(github_id, login)
     DB -->> API: user_record
-    API ->> Frontend: JWT token + user info
+     API ->> Frontend: Set-Cookie: JWT (Secure, HttpOnly, SameSite=Lax) + user info
     Frontend ->> User: ログイン完了画面へ遷移
 ```
