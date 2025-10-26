@@ -1,0 +1,38 @@
+version: '3'
+
+tasks:
+  dev:
+    desc: Start both frontend and backend development servers
+    deps:
+      - dev:frontend
+      - dev:backend
+
+  dev:frontend:
+    desc: Start frontend development server
+    dir: frontend
+    cmds:
+      - npm run dev
+
+  dev:backend:
+    desc: Start backend development server
+    dir: git-feed-backend
+    cmds:
+      - bundle exec rails server
+
+  install:
+    desc: Install dependencies for both frontend and backend
+    cmds:
+      - task: install:frontend
+      - task: install:backend
+
+  install:frontend:
+    desc: Install frontend dependencies
+    dir: frontend
+    cmds:
+      - npm install
+
+  install:backend:
+    desc: Install backend dependencies
+    dir: git-feed-backend
+    cmds:
+      - bundle install
