@@ -12,13 +12,13 @@
 
   app:
     build:
-      context: .
+      context: ./git-feed-backend
       dockerfile: Dockerfile
     command: /bin/bash -c "rm -f tmp/pids/server.pid && bundle install && bin/dev"
     ports:
-      - "3000:3000"
+      - "3001:3001"
     volumes:
-      - .:/srv:cached
+      - ./git-feed-backend:/srv:cached
       - bundle_ruby:/usr/local/bundle
     depends_on:
       - db
@@ -27,7 +27,7 @@
     environment:
       DATABASE_USER: root
       DB_HOST: db
-      DB_NAME: nari_note_backend_development
+      DB_NAME: git_feed_backend_development
 
 volumes:
   postgres:
