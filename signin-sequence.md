@@ -25,7 +25,6 @@ sequenceDiagram
         Frontend ->> User: Redirect to /timeline
     else 新規ユーザー（サインアップ）
         DB -->> RailsAPI: null
-        RailsAPI ->> RailsAPI: create_user_if_not_exists(github_id, login)
         RailsAPI ->> DB: insert new user
         DB -->> RailsAPI: user_record
         RailsAPI -->> Frontend: Set-Cookie: JWT (Secure, HttpOnly, SameSite=Lax)
