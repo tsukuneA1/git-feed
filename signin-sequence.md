@@ -12,17 +12,13 @@ sequenceDiagram
     GitHub ->> User: 認可画面表示
     User ->> GitHub: 認可を許可
     GitHub ->> Frontend: Redirect with code,state
-
     Frontend ->> API_Auth: POST /auth/github/callback (code, state, code_verifier)
     API_Auth ->> API_Auth: state検証
     API_Auth ->> GitHub: POST /login/oauth/access_token (client_id, client_secret, code, redirect_uri)
     GitHub -->> API_Auth: access_token
     API_Auth ->> GitHub: GET /user with access_token
     GitHub -->> API_Auth: user_info (id, login)
-
     API_Auth ->> DB: find_user_by_github_id(github_id)
-
-    DB -->> API: user_record
     alt 既存ユーザー（サインイン）
         DB -->> API_Auth: user_record
         API_Auth -->> Frontend: Set-Cookie: JWT (Secure, HttpOnly, SameSite=Lax)
