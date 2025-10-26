@@ -4,7 +4,6 @@ sequenceDiagram
     participant Frontend as Next.js
     participant GitHub as GitHub OAuth
     participant RailsAPI as Rails API Server
-    participant UserService as ユーザーサービス
     participant DB as データベース
 
     User ->> Frontend: 「GitHubでサインイン」クリック
@@ -26,10 +25,9 @@ sequenceDiagram
         Frontend ->> User: Redirect to /timeline
     else 新規ユーザー（サインアップ）
         DB -->> RailsAPI: null
-        RailsAPI ->>+ UserService: create_user_if_not_exists(github_id, login)
-        UserService ->> DB: insert new user
-        DB -->> UserService: user_record
-        UserService -->>- RailsAPI: user_record
+        RailsAPI ->> RailsAPI: create_user_if_not_exists(github_id, login)
+        RailsAPI ->> DB: insert new user
+        DB -->> RailsAPI: user_record
         RailsAPI -->> Frontend: Set-Cookie: JWT (Secure, HttpOnly, SameSite=Lax)
         Frontend ->> User: Redirect to /tag-settings
     end
