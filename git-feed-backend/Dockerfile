@@ -10,7 +10,7 @@ RUN apt-get update -q && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /src
+RUN mkdir -p /srv
 WORKDIR /srv
 
 EXPOSE 3001
