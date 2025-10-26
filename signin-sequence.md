@@ -4,6 +4,7 @@ sequenceDiagram
     participant Frontend as Next.js
     participant GitHub as GitHub OAuth
     participant RailsAPI as Rails API Server
+    participant UserService as ユーザーサービス
     participant DB as データベース
 
     User ->> Frontend: 「GitHubでサインイン」クリック
