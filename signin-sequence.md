@@ -25,10 +25,10 @@ sequenceDiagram
         Frontend ->> User: Redirect to /timeline
     else 新規ユーザー（サインアップ）
         DB -->> API_Auth: null
-        API_Auth ->> API_User: POST /users (github_id, login)
-        API_User ->> DB: insert new user
-        DB -->> API_User: user_record
-        API_User -->> API_Auth: user_record
+        API_Auth ->>+ UserService: create_user_if_not_exists(github_id, login)
+        UserService ->> DB: insert new user
+        DB -->> UserService: user_record
+        UserService -->>- API_Auth: user_record
         API_Auth -->> Frontend: Set-Cookie: JWT (Secure, HttpOnly, SameSite=Lax)
         Frontend ->> User: Redirect to /tag-settings
     end
