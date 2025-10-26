@@ -3,9 +3,9 @@ version: '3'
 tasks:
   dev:
     desc: Start both frontend and backend development servers
-    deps:
-      - dev:frontend
-      - dev:backend
+    cmds:
+      - task: dev:frontend
+      - task: dev:backend
 
   dev:frontend:
     desc: Start frontend development server
