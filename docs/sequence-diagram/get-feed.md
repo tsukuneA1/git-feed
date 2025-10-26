@@ -30,3 +30,7 @@ sequenceDiagram
   GetFeedsWorker->>Redis: save feed
   GetFeedsWorker-->>Sidekiq: end
 ```
+
+## ジョブ実行周期
+
+WIP
