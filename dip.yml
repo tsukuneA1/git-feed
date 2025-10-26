@@ -1,0 +1,30 @@
+version: '7.1'
+
+compose:
+  files:
+    - docker-compose.yml
+
+interaction:
+  bash:
+    service: app
+    command: /bin/bash
+    compose_run_options: [no-deps]
+
+  bundle:
+    service: app
+    command: bundle
+    compose_run_options: [no-deps]
+
+  rails:
+    service: app
+    command: bin/rails
+
+  rubocop:
+    service: app
+    command: bin/rubocop -P
+    compose_run_options: [no-deps]
+
+  ruby:
+    service: app
+    command: ruby
+    compose_run_options: [no-deps]
