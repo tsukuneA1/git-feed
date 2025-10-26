@@ -12,11 +12,12 @@ sequenceDiagram
     GitHub ->> User: 認可画面表示
     User ->> GitHub: 認可を許可
     GitHub ->> Frontend: Redirect with code,state
-    Frontend ->> GitHub: POST /login/oauth/access_token (code, code_verifier, client_id, redirect_uri)
-    GitHub -->> Frontend: access_token
-    Frontend ->> GitHub: GET /user with access_token
-    GitHub -->> Frontend: user_info (id, login)
-    Frontend ->> RailsAPI: POST /auth/github/jwt (user_info)
+    Frontend ->> RailsAPI: POST /auth/github/callback (code, code_verifier)
+    RailsAPI ->> GitHub: POST /login/oauth/access_token (code, code_verifier, client_id, client_secret, redirect_uri)
+    GitHub -->> RailsAPI: access_token
+    RailsAPI ->> GitHub: GET /user with access_token
+    GitHub -->> RailsAPI: user_info (id, login)
+    RailsAPI ->> DB: find_user_by_github_id(github_id)
     RailsAPI ->> DB: find_user_by_github_id(github_id)
     alt 既存ユーザー（サインイン）
         DB -->> RailsAPI: user_record
