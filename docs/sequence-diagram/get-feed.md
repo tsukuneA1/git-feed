@@ -26,9 +26,7 @@ sequenceDiagram
   GitHub-->>-GetFeedsWorker: return
   GetFeedsWorker->>+Ai: summarize
   Ai-->>-GetFeedsWorker: return summary
-  GetFeedsWorker->>Database: save
-  GetFeedsWorker->>Redis: save
-  GetFeedsWorker->>Database: 古いデータの削除
-  GetFeedsWorker->>Redis: 古いデータの削除
+  GetFeedsWorker->>Database: save repository
+  GetFeedsWorker->>Redis: save feed
   GetFeedsWorker-->>Sidekiq: end
 ```
