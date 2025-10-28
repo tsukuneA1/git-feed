@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-githubのmergeされたPRをリポジトリのコンテキストと組み合わせてTwitter likeにフィードするWebアプリ。バックエンドがRuby on Rails, フロントエンドがNext.js app routerで開発を行う。
+GitHubのmergeされたPRをリポジトリのコンテキストと組み合わせてTwitter likeにフィードするWebアプリ。バックエンドがRuby on Rails, フロントエンドがNext.js app routerで開発を行う。
 
 ## ドキュメント参照ガイド
 
