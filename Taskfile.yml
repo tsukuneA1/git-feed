@@ -3,9 +3,30 @@ version: '3'
 tasks:
   dev:
     desc: Start both frontend and backend development servers
+    deps:
+      - dev:backend
+      - dev:frontend
+
+  dev:backend:
+    desc: Start backend with Docker Compose
     cmds:
-      - task: dev:frontend
-      - task: dev:backend
+      - docker compose up
+
+  dev:build:
+    desc: Build and start backend with Docker Compose
+    cmds:
+      - docker compose up --build
+
+  dev:down:
+    desc: Stop all services (backend Docker + frontend)
+    cmds:
+      - docker compose down
+      - pkill -f "npm run dev" || true
+
+  dev:logs:
+    desc: Show logs for all services
+    cmds:
+      - docker compose logs -f
 
   dev:frontend:
     desc: Start frontend development server
@@ -13,17 +34,11 @@ tasks:
     cmds:
       - npm run dev
 
-  dev:backend:
-    desc: Start backend development server
-    dir: git-feed-backend
-    cmds:
-      - bundle exec rails server
-
   install:
     desc: Install dependencies for both frontend and backend
     cmds:
       - task: install:frontend
-      - task: install:backend
+      - docker compose run --rm backend bundle install
 
   install:frontend:
     desc: Install frontend dependencies
@@ -33,6 +48,20 @@ tasks:
 
   install:backend:
     desc: Install backend dependencies
-    dir: git-feed-backend
     cmds:
-      - bundle install
+      - docker compose run --rm backend bundle install
+
+  db:setup:
+    desc: Setup database
+    cmds:
+      - docker compose run --rm backend bin/rails db:setup
+
+  db:migrate:
+    desc: Run database migrations
+    cmds:
+      - docker compose run --rm backend bin/rails db:migrate
+
+  db:reset:
+    desc: Reset database
+    cmds:
+      - docker compose run --rm backend bin/rails db:reset

@@ -3,7 +3,7 @@ FROM ruby:3.3.7-slim AS build
 RUN apt-get update -q && \
     apt-get install -y --no-install-recommends \
     build-essential \
-    default-libmysqlclient-dev \
+    libpq-dev \
     libyaml-dev \
     git \
     vim && \
