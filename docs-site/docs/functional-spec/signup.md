@@ -1,3 +1,11 @@
+---
+sidebar_position: 2
+title: サインアップ
+---
+
+# サインアップ
+
+```gherkin
 Feature: GitHub OAuthによる新規アカウント作成
   As a 新規ユーザー
   I want GitHubアカウントでサインインできる
@@ -20,3 +28,4 @@ Feature: GitHub OAuthによる新規アカウント作成
     When 新規ユーザー作成に失敗した
     Then エラーメッセージを表示する
       And サインインページに戻す
+```
