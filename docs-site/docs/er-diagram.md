@@ -1,3 +1,10 @@
+---
+sidebar_position: 3
+title: ER図
+---
+
+# ER図
+
 ```mermaid
 erDiagram
     User ||--o{ UserTag : "selects"

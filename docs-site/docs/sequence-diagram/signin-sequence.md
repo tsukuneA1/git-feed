@@ -1,3 +1,10 @@
+---
+sidebar_position: 1
+title: サインインフロー
+---
+
+# サインインフロー
+
 ```mermaid
 sequenceDiagram
     participant User as ユーザー
