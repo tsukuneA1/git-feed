@@ -38,7 +38,7 @@ tasks:
     desc: Install dependencies for both frontend and backend
     cmds:
       - task: install:frontend
-      - docker compose run --rm backend bundle install
+      - task: install:backend
 
   install:frontend:
     desc: Install frontend dependencies
@@ -51,17 +51,32 @@ tasks:
     cmds:
       - dip bundle install
 
+  rails:console:
+    desc: Start Rails console
+    cmds:
+      - dip rails console
+
+  bash:
+    desc: Start bash shell in backend container
+    cmds:
+      - dip bash
+
+  rubocop:
+    desc: Run RuboCop
+    cmds:
+      - dip rubocop
+
   db:setup:
     desc: Setup database
     cmds:
-      - docker compose run --rm backend bin/rails db:setup
+      - dip rails db:setup
 
   db:migrate:
     desc: Run database migrations
     cmds:
-      - docker compose run --rm backend bin/rails db:migrate
+      - dip rails db:migrate
 
   db:reset:
     desc: Reset database
     cmds:
-      - docker compose run --rm backend bin/rails db:reset
+      - dip rails db:reset

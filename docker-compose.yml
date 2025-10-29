@@ -26,7 +26,11 @@ services:
     stdin_open: true
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/git_feed_backend_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: git_feed_backend_development
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
 
 volumes:
   postgres:

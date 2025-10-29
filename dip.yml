@@ -6,25 +6,25 @@ compose:
 
 interaction:
   bash:
-    service: app
+    service: backend
     command: /bin/bash
     compose_run_options: [no-deps]
 
   bundle:
-    service: app
+    service: backend
     command: bundle
     compose_run_options: [no-deps]
 
   rails:
-    service: app
-    command: bin/rails
+    service: backend
+    command: bundle exec rails
 
   rubocop:
-    service: app
-    command: bin/rubocop -P
+    service: backend
+    command: bundle exec rubocop -P
     compose_run_options: [no-deps]
 
   ruby:
-    service: app
+    service: backend
     command: ruby
     compose_run_options: [no-deps]
