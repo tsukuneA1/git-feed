@@ -1,3 +1,11 @@
+---
+sidebar_position: 6
+title: フィードタイムライン
+---
+
+# フィードタイムライン
+
+```gherkin
 Feature: フィードタイムライン
   As a ログイン中のユーザー
   I want タイムラインのPRカードからGitHubに遷移したい
@@ -43,3 +51,4 @@ Feature: フィードタイムライン
       And 変更の概要が150字程度で表示される
       And 変更行数が「+<additions> / -<deletions>」の形式で表示される
       And マージされた日付が表示される
+```

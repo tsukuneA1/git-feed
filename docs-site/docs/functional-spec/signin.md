@@ -1,4 +1,12 @@
- Feature: GitHubサインイン機能
+---
+sidebar_position: 1
+title: サインイン
+---
+
+# サインイン
+
+```gherkin
+Feature: GitHubサインイン機能
   As a ユーザー
   I want GitHubアカウントでサインインできるようにしたい
   So that サイトのページを閲覧できるようにする
@@ -52,3 +60,4 @@
     When 端末Bで同じアカウントでサインインする
     Then 端末Bもサインインできる
       And 端末Aのセッションは維持される
+```
