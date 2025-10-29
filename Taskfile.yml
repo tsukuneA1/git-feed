@@ -49,7 +49,7 @@ tasks:
   install:backend:
     desc: Install backend dependencies
     cmds:
-      - docker compose run --rm backend bundle install
+      - dip bundle install
 
   db:setup:
     desc: Setup database
