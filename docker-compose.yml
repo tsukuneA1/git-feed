@@ -1,20 +1,20 @@
-﻿services:
+services:
   db:
     image: postgres:16.10-alpine3.22
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: git_feed_backend_development
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
-  app:
+  backend:
     build:
       context: ./git-feed-backend
       dockerfile: Dockerfile
-    command: /bin/bash -c "rm -f tmp/pids/server.pid && bundle install && bin/dev"
+    command: /bin/bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rails server -b 0.0.0.0 -p 3001"
     ports:
       - "3001:3001"
     volumes:
@@ -25,9 +25,12 @@
     tty: true
     stdin_open: true
     environment:
-      DATABASE_USER: root
-      DB_HOST: db
-      DB_NAME: git_feed_backend_development
+      RAILS_ENV: development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: git_feed_backend_development
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
 
 volumes:
   postgres:
