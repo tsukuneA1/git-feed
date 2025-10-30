@@ -17,11 +17,11 @@ interaction:
 
   rails:
     service: backend
-    command: bundle exec rails
+    command: bin/rails
 
   rubocop:
     service: backend
-    command: bundle exec rubocop -P
+    command: bin/rubocop -P
     compose_run_options: [no-deps]
 
   ruby:
