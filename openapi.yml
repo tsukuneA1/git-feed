@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: Git Feed API
+  version: 1.0.0
+  description: GitHubのmergeされたPRをリポジトリのコンテキストと組み合わせてTwitter likeにフィードするWebアプリのAPI
+
+servers:
+  - url: http://localhost:3001/api
+    description: Local development server
+
+paths:
+  /tags:
+    get:
+      summary: タグ一覧取得
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: perPage
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagListResponse'
+
+  /users/me/tag-selections:
+    get:
+      summary: タグ選択状態取得
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagSelection'
+
+    put:
+      summary: タグ選択更新
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagSelection'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagSelection'
+
+components:
+  schemas:
+    Tag:
+      type: object
+      required:
+        - id
+        - name
+        - popularityRank
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        popularityRank:
+          type: integer
+
+    TagListResponse:
+      type: object
+      required:
+        - items
+        - totalPages
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        totalPages:
+          type: integer
+
+    TagSelection:
+      type: object
+      required:
+        - tagIds
+      properties:
+        tagIds:
+          type: array
+          items:
+            type: integer
