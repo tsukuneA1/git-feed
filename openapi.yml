@@ -34,21 +34,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagListResponse'
+                $ref: "#/components/schemas/TagListResponse"
 
   /users/me/tag-selections:
     get:
       summary: タグ選択状態取得
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagSelection'
+                $ref: "#/components/schemas/TagSelection"
 
     put:
       summary: タグ選択更新
@@ -57,15 +57,112 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TagSelection'
+              $ref: "#/components/schemas/TagSelection"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagSelection'
+                $ref: "#/components/schemas/TagSelection"
+
+  /auth/github/callback:
+    post:
+      summary: GitHub認可コードを受け取り、JWTを発行する
+      description: >
+        フロントエンドから送られた GitHub OAuth の code を受け取り、
+        サーバ側で GitHub に access_token を問い合わせてユーザー情報を取得。
+        ユーザーが存在すればサインイン、存在しなければ作成し、JWT を Secure/HttpOnly クッキーで返す。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - code
+              properties:
+                code:
+                  type: string
+                  description: GitHub からリダイレクトされた認可コード
+                code_verifier:
+                  type: string
+                  description: PKCE の code_verifier（フローにより不要）
+      responses:
+        "200":
+          description: JWT を Set-Cookie で返す（user 情報を含む JSON も返す）
+          headers:
+            Set-Cookie:
+              description: JWT クッキー (Secure, HttpOnly, SameSite=Lax)
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorized (oauth 失敗等)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Conflict (同時作成の競合)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /auth/refresh:
+    post:
+      summary: JWT をリフレッシュする
+      description: >
+        HttpOnly のリフレッシュ Cookie を使って新しい JWT を発行します。
+        実装方針に応じてリフレッシュトークンの寿命を設定してください。
+      responses:
+        "200":
+          description: 新しい JWT を Set-Cookie で返す
+          headers:
+            Set-Cookie:
+              description: 新しい JWT クッキー (Secure, HttpOnly, SameSite=Lax)
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: Unauthorized (リフレッシュトークン無効)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /auth/logout:
+    post:
+      summary: ログアウト（JWT クッキーを失効）
+      description: サーバでクッキー無効化処理を行う。
+      responses:
+        "200":
+          description: ログアウト成功
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: jwt
   schemas:
     Tag:
       type: object
@@ -90,7 +187,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: "#/components/schemas/Tag"
         totalPages:
           type: integer
 
@@ -103,3 +200,27 @@ components:
           type: array
           items:
             type: integer
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string
+
+    UserResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        created:
+          type: boolean
