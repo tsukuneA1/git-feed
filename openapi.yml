@@ -5,7 +5,7 @@ info:
   description: GitHubのmergeされたPRをリポジトリのコンテキストと組み合わせてTwitter likeにフィードするWebアプリのAPI
 
 servers:
-  - url: http://localhost:3001/api/v1
+  - url: http://localhost:3001/api
     description: Local development server
 
 paths:
@@ -75,7 +75,7 @@ components:
         - popularityRank
       properties:
         id:
-          type: string
+          type: integer
         name:
           type: string
         popularityRank:
@@ -102,4 +102,4 @@ components:
         tagIds:
           type: array
           items:
-            type: string
+            type: integer

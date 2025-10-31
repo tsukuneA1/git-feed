@@ -6,6 +6,93 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 GitHubのmergeされたPRをリポジトリのコンテキストと組み合わせてTwitter likeにフィードするWebアプリ。バックエンドがRuby on Rails, フロントエンドがNext.js app routerで開発を行う。
 
+## プロジェクト構成
+
+- `/frontend` - Next.js 16 (App Router) フロントエンド
+- `/git-feed-backend` - Rails 8 バックエンド API
+- `/docs-site` - Docusaurus ドキュメントサイト ([https://git-feed-docusaurus.vercel.app/](https://git-feed-docusaurus.vercel.app/))
+- `openapi.yml` - API スキーマ定義
+
+## アーキテクチャ
+
+### フロントエンド
+- **Next.js App Router** でルーティング
+- **Container/Presentational パターン** でコンポーネント分離
+- **TanStack Query** で非同期データ管理
+- **Tailwind CSS** でスタイリング
+
+### バックエンド
+- **Model/Service/Controller** の3レイヤーアーキテクチャ
+  - Controller: リクエスト/レスポンス処理
+  - Service: ビジネスロジック (API毎に作成)
+  - Model: データアクセス層
+- **Sidekiq** で非同期ジョブ処理 (フィード取得等)
+- **Redis** でキャッシュ管理
+- **PostgreSQL** でデータ永続化
+- **OpenAPI (Rswag)** でスキーマ駆動開発
+
+## 開発コマンド
+
+### 基本コマンド (Taskfile)
+
+```bash
+# 両方の開発サーバーを起動
+task dev
+
+# フロントエンドのみ起動 (localhost:3000)
+task dev:frontend
+
+# バックエンドのみ起動 (Docker Compose)
+task dev:backend
+
+# サービス停止
+task dev:down
+
+# ログ確認
+task dev:logs
+
+# 依存関係のインストール
+task install
+```
+
+### バックエンド (dip + Docker)
+
+バックエンドコマンドは `dip` を使用 (Docker上でRailsコマンド実行)
+
+```bash
+# Rails console
+task rails:console
+# または: dip rails console
+
+# コンテナのbash
+task bash
+# または: dip bash
+
+# RuboCop (リンター)
+task rubocop
+# または: dip rubocop
+
+# DB操作
+task db:setup    # DB初期化
+task db:migrate  # マイグレーション
+task db:reset    # DBリセット
+
+# 直接dipコマンド例
+dip bundle install      # gem追加後
+dip rails db:seed       # シードデータ投入
+dip rails routes        # ルーティング確認
+```
+
+### フロントエンド
+
+```bash
+cd frontend
+
+npm run dev    # 開発サーバー起動
+npm run build  # プロダクションビルド
+npm run lint   # ESLint
+```
+
 ## ドキュメント参照ガイド
 
 ### アーキテクチャ・設計
@@ -29,18 +116,9 @@ GitHubのmergeされたPRをリポジトリのコンテキストと組み合わ�
 - [PRスコアリング方針](docs-site/docs/domain/pr-scoring-method.md) - フィードの重要度判定ロジック
 - [GitHubトークン管理](docs-site/docs/domain/github-token.md) - レートリミット・ノード制限の考慮事項
 
-## 開発コマンド
+## 開発フロー
 
-```bash
-# 両方の開発サーバーを起動
-task dev
-
-# フロントエンドのみ起動
-task dev:frontend
-
-# バックエンドのみ起動
-task dev:backend
-
-# 依存関係のインストール
-task install
-```
+1. **API変更時**: `openapi.yml` を先に更新 (スキーマ駆動開発)
+2. **バックエンド実装**: Service → Controller → Route の順で実装
+3. **フロントエンド実装**: Container (ロジック) → Presentational (UI) の順で実装
+4. **コード品質**: バックエンドは `dip rubocop` でチェック、フロントエンドは `npm run lint` でチェック
