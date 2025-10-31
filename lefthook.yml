@@ -22,5 +22,5 @@ pre-commit:
   commands:
     rubocop:
       glob: "git-feed-backend/**/*.rb"
-      run: bundle exec rubocop -a {staged_files}
+      run: cd git-feed-backend && bundle exec rubocop -a {staged_files}
 
