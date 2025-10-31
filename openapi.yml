@@ -70,8 +70,8 @@ paths:
       summary: GitHub認可コードを受け取り、JWTを発行する
       description: >
         フロントエンドから送られた GitHub OAuth の code を受け取り、
-        サーバ側で GitHub に access_token を問い合わせてユーザー情報を取得します。
-        ユーザーが存在すればサインイン、存在しなければ作成し、JWT を Secure/HttpOnly クッキーで返します。
+        サーバ側で GitHub に access_token を問い合わせてユーザー情報を取得。
+        ユーザーが存在すればサインイン、存在しなければ作成し、JWT を Secure/HttpOnly クッキーで返す。
       requestBody:
         required: true
         content:
@@ -146,7 +146,7 @@ paths:
   /auth/logout:
     post:
       summary: ログアウト（JWT クッキーを失効）
-      description: サーバでクッキー無効化処理を行います。
+      description: サーバでクッキー無効化処理を行う。
       responses:
         "200":
           description: ログアウト成功
@@ -224,13 +224,3 @@ components:
           $ref: "#/components/schemas/User"
         created:
           type: boolean
-
-    TokenInfo:
-      type: object
-      properties:
-        iat:
-          type: integer
-          description: Issued At (unix timestamp)
-        exp:
-          type: integer
-          description: Expiration (unix timestamp)
