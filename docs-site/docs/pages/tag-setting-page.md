@@ -29,6 +29,6 @@ title: タグ設定ページ
 
 | 利用シーン | Method | Endpoint | 入力パラメータ | 主なレスポンス |
 | --- | --- | --- | --- | --- |
-| タグ候補の取得 | GET | /tags | page, perPage (default 20), search (optional) | 200 with TagPage (items, page, totalPages, selectedTagIds) |
+| タグ候補の取得 | GET | /tags | page, perPage (default 20), search (optional) | 200 with TagListResponse (items, totalPages) |
 | 現在の選択状態取得 | GET | /users/me/tag-selections | なし | 200 with TagSelection (tagIds) |
-| 選択内容の保存 | PUT | /users/me/tag-selections | TagSelectionUpdate (tagIds) | 200 with TagSelection / 204 |
+| 選択内容の保存 | PUT | /users/me/tag-selections | TagSelection (tagIds) | 200 with TagSelection / 204 |
