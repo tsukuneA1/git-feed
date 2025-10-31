@@ -45,6 +45,11 @@ const sidebars: SidebarsConfig = {
       label: 'ドメイン知識',
       items: ['domain/pr-scoring-method', 'domain/github-token'],
     },
+    {
+      type: 'category',
+      label: 'ページ設計',
+      items: ['pages/tag-setting-page'],
+    },
   ],
 };
 
