@@ -21,6 +21,6 @@ pre-commit:
   parallel: true
   commands:
     rubocop:
-      glob: "backend/**/*.rb"
+      glob: "git-feed-backend/**/*.rb"
       run: bundle exec rubocop -a {staged_files}
 
