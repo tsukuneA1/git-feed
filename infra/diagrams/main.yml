@@ -1,0 +1,91 @@
+Diagram:
+  DefinitionFiles:
+    - Type: URL
+      Url: "https://raw.githubusercontent.com/awslabs/diagram-as-code/main/definitions/definition-for-aws-icons-light.yaml"
+      
+  Resources:
+    Canvas:
+      Type: AWS::Diagram::Canvas
+      Direction: horizontal
+      Children:
+        - User
+        - AWSCloud
+
+    User:
+      Type: AWS::Diagram::Resource
+      Preset: User
+
+    AWSCloud:
+      Type: AWS::Diagram::Cloud
+      Direction: horizontal
+      Preset: AWSCloudNoLogo
+      Align: center
+      Children:
+        - VPC
+
+    VPC:
+      Type: AWS::EC2::VPC
+      Children:
+        - AppServerSubnet
+        - DBSubnet
+      BorderChildren:
+        - Position: W
+          Resource: IGW
+
+    AppServerSubnet:
+      Type: AWS::EC2::Subnet
+      Preset: PublicSubnet
+      Children:
+        - ApplicationServer
+
+    DBSubnet:
+      Type: AWS::EC2::Subnet
+      Preset: PrivateSubnet
+      Children:
+        - DBInstance
+        - CacheInstance
+
+    ApplicationServer:
+      Type: AWS::EC2::Instance
+
+    DBInstance:
+      Type: AWS::RDS::DBInstance
+
+    CacheInstance:
+      Type: AWS::ElastiCache::CacheCluster
+      
+    IGW:
+      Type: AWS::EC2::InternetGateway
+      IconFill:
+        Type: rect
+      
+  Links:
+    - Source: User
+      SourcePosition: E
+      Target: IGW
+      TargetPosition: W
+      TargetArrowHead:
+        Type: Open
+
+    - Source: IGW
+      SourcePosition: E
+      Target: ApplicationServer
+      TargetPosition: W
+      TargetArrowHead:
+        Type: Open
+
+    - Source: ApplicationServer
+      SourcePosition: E
+      Target: DBInstance
+      TargetPosition: N
+      TargetArrowHead:
+        Type: Open
+      Type: orthogonal
+
+    - Source: ApplicationServer
+      SourcePosition: E
+      Target: CacheInstance
+      TargetPosition: N
+      TargetArrowHead:
+        Type: Open
+      Type: orthogonal
